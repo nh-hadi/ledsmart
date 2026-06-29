@@ -39,7 +39,7 @@ class _SettingScreenState extends State<SettingScreen> {
     
     // Isi data default jika ada di statusData
     _staSsidController.text = widget.statusData['sta_ssid'] ?? '';
-    _apSsidController.text = widget.statusData['ssid'] ?? ''; // ssid target/AP
+    _apSsidController.text = widget.statusData['ap_ssid'] ?? ''; // ssid target/AP
   }
 
   @override

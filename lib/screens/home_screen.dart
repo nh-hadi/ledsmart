@@ -32,12 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, dynamic>> _playlistSteps = [];
   int _activeDuration = 10;
 
-  final List<String> _daftarEfek = [
-    'Static (Solid Color)',
-    'Blink',
-    'Breath',
-    'Rainbow',
-    'Chase',
+  final List<Map<String, dynamic>> _daftarEfek = [
+    {'id': 0, 'name': 'Static (Solid Color)'},
+    {'id': 1, 'name': 'Blink'},
+    {'id': 2, 'name': 'Breath'},
+    {'id': 11, 'name': 'Rainbow'},
+    {'id': 33, 'name': 'Chase Rainbow'},
   ];
 
   @override
@@ -227,13 +227,12 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildDropdown(
                 prefixIcon: Icons.animation,
                 value: _efekTerpilih,
-                items: List.generate(
-                  _daftarEfek.length,
-                  (i) => DropdownMenuItem(
-                    value: i,
-                    child: Text(_daftarEfek[i]),
+                items: _daftarEfek.map(
+                  (eff) => DropdownMenuItem<int>(
+                    value: eff['id'] as int,
+                    child: Text(eff['name'] as String),
                   ),
-                ),
+                ).toList(),
                 onChanged: (v) {
                   setState(() => _efekTerpilih = v ?? 0);
                   if (_livePreview) {
@@ -403,7 +402,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         setState(() {
                           _playlistSteps.add({
                             "mode": _efekTerpilih,
-                            "name": _daftarEfek[_efekTerpilih],
+                            "name": _daftarEfek.firstWhere((e) => e['id'] == _efekTerpilih)['name'],
                             "duration": _activeDuration,
                             "color": _hexStr,
                           });
